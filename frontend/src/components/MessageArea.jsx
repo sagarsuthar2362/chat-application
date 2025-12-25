@@ -53,7 +53,7 @@ const MessageArea = () => {
   }
   return (
     <div className={`relative ${selectedUser ? "flex-1" : "hidden"}`}>
-      <div className="bg-zinc-900 text-white h-20 flex items-center px-8 gap-6">
+      <div className="bg-zinc-900 text-white h-20 flex items-center px-8 gap-6 fixed top-0 w-full">
         <MoveLeftIcon
           className="cursor-pointer"
           onClick={() => dispatch(setSelectedUser(null))}
@@ -69,11 +69,11 @@ const MessageArea = () => {
       </div>
 
       <div className="h-full flex flex-col gap-4 p-4">
-        {messageList?.map((m) =>
+        {messageList !== null && messageList?.map((m) =>
           m.sender === userData._id ? (
-            <MessageSender message={m.message} />
+            <MessageSender message={m.message} key={m._id}/>
           ) : (
-            <MessageReceiver message={m.message} />
+            <MessageReceiver message={m.message} key={m._id}/>
           )
         )}
       </div>

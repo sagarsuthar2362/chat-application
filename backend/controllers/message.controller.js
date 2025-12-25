@@ -30,7 +30,7 @@ export const sendMessage = async (req, res) => {
     }
     const receiverSocketId = getUserSocketId(receiver);
     console.log("receiver socket id is:", receiverSocketId);
-    io.to(receiverSocketId).emit("message", newMessage);
+    io.to(receiverSocketId).emit("receive-message", newMessage);
     return res.status(200).json({ message: "message sent succesfully" });
   } catch (error) {
     console.log(error);

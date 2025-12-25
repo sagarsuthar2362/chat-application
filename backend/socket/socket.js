@@ -15,10 +15,7 @@ io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
   if (userId !== undefined) {
     users[userId] = socket.id;
-    console.log(users);
   }
-
-  socket.emit("hello", "hello sagar");
 });
 
 export const getUserSocketId = (userId) => {

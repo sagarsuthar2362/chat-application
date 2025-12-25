@@ -10,23 +10,26 @@ import useGetAllUsers from "./customHooks/useGetAllUsers";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { backendBaseUrl } from "./main";
-import { setMessages } from "./redux/messageSlice";
+import { addMessage, setMessages } from "./redux/messageSlice";
 
 const App = () => {
   useCurrentUser();
   useGetAllUsers();
   const { userData } = useSelector((state) => state.user);
+  const { messageList } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const socket = io(`${backendBaseUrl}`, {
       query: { userId: userData?._id },
     });
 
-    socket.on("message", (m) => {
-      dispatch(setMessages(m.message));
+    socket.on("receive-message", (newMessage) => {
+      dispatch(addMessage(newMessage));
     });
-    console.log(socket);
+
+    return () => {
+      socket.disconnect();
+    };
   }, [userData]);
 
   return (
