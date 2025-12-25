@@ -28,7 +28,6 @@ const Signup = () => {
         },
         { withCredentials: true }
       );
-      console.log(res);
       dispatch(setUserData(res.data));
       navigate("/profile");
     } catch (error) {

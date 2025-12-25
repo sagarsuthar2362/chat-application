@@ -34,7 +34,6 @@ const Profile = () => {
         }
       );
 
-      console.log(res);
       setEditForm(false);
       window.location.reload();
     } catch (error) {

@@ -8,7 +8,7 @@ export const server = http.createServer(app);
 const users = {};
 
 export const io = new Server(server, {
-  cors: "http://localhost:5173",
+  cors: "https://chat-backend-b77g.onrender.com/",
 });
 
 io.on("connection", (socket) => {
