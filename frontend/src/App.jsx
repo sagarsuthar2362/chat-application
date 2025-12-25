@@ -36,12 +36,12 @@ const App = () => {
     <Routes>
       <Route
         path="/"
-        element={userData !== "null" ? <Home /> : <Navigate to={"/login"} />}
+        element={userData !== null ? <Home /> : <Navigate to={"/login"} />}
       />
 
       <Route
         path="/profile"
-        element={userData !== "null" ? <Profile /> : <Navigate to={"/login"} />}
+        element={userData !== null ? <Profile /> : <Navigate to={"/login"} />}
       />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
