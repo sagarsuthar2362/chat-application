@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { backendBaseUrl } from "../main";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessages } from "../redux/messageSlice";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const useGetMessages = () => {
   const { selectedUser } = useSelector((state) => state.user);

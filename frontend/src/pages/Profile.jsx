@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { CameraIcon, Pencil } from "lucide-react";
 import axios from "axios";
-import { backendBaseUrl } from "../main";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Profile = () => {
   const [editForm, setEditForm] = useState(false);

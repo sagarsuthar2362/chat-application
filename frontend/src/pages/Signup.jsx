@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { backendBaseUrl } from "../main";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {
   const navigate = useNavigate();

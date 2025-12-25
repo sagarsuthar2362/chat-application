@@ -7,9 +7,10 @@ import useGetMessages from "../customHooks/useGetMessages";
 import MessageSender from "./MessageSender";
 import MessageReceiver from "./MessageReceiver";
 import axios from "axios";
-import { backendBaseUrl } from "../main";
 import { useState } from "react";
 import { setMessages } from "../redux/messageSlice";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 const MessageArea = () => {
   useGetMessages();

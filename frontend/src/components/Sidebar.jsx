@@ -7,8 +7,9 @@ import {
 } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { backendBaseUrl } from "../main";
 import { Link, useNavigate } from "react-router-dom";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 const Sidebar = () => {
   const dispatch = useDispatch();

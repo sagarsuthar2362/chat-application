@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { backendBaseUrl } from '../main';
 import axios from 'axios';
 import { setOtherUsers } from '../redux/userSlice';
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const useGetAllUsers = () => {
   const dispatch = useDispatch();

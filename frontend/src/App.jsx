@@ -9,8 +9,8 @@ import Profile from "./pages/Profile";
 import useGetAllUsers from "./customHooks/useGetAllUsers";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
-import { backendBaseUrl } from "./main";
 import { addMessage, setMessages } from "./redux/messageSlice";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
   useCurrentUser();

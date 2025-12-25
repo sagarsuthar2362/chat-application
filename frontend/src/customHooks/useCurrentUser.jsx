@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { backendBaseUrl } from "../main";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 const useCurrentUser = () => {
   const dispatch = useDispatch();

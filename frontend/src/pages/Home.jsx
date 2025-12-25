@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOtherUsers, setUserData } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { backendBaseUrl } from "../main";
 import Sidebar from "../components/Sidebar";
 import MessageArea from "../components/MessageArea";
 import useGetMessages from "../customHooks/useGetMessages";
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 const Home = () => {
   const { userData, otherUsers } = useSelector((state) => state.user);

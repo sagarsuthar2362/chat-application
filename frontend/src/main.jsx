@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
 
-export const backendBaseUrl = "https://chat-backend-b77g.onrender.com";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
