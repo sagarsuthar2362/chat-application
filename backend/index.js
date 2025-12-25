@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chat-backend-b77g.onrender.com",
+    origin: "https://chat-frontend-9jcn.onrender.com",
     credentials: true,
   })
 );
