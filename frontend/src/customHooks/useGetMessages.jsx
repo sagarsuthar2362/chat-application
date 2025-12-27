@@ -18,7 +18,6 @@ const useGetMessages = () => {
             withCredentials: true,
           }
         );
-        console.log(res);
         dispatch(setMessages(res.data?.conversation?.messages));
       } catch (error) {
         console.log(error);

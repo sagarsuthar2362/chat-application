@@ -10,27 +10,45 @@ import useGetAllUsers from "./customHooks/useGetAllUsers";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { addMessage, setMessages } from "./redux/messageSlice";
+import { setActiveUsers } from "./redux/userSlice";
+import { socket } from "./socket";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
   useCurrentUser();
   useGetAllUsers();
-  const { userData } = useSelector((state) => state.user);
+  const { userData, loading } = useSelector((state) => state.user);
   const { messageList } = useSelector((state) => state.message);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const socket = io(`${backendBaseUrl}`, {
-      query: { userId: userData?._id },
-    });
+    if (userData?._id) {
+      socket.io.opts.query = { userId: userData._id };
+      socket.connect();
 
-    socket.on("receive-message", (newMessage) => {
-      dispatch(addMessage(newMessage));
-    });
+      socket.on("receive-message", (newMessage) => {
+        dispatch(addMessage(newMessage));
+      });
 
-    return () => {
-      socket.disconnect();
-    };
+      socket.on("active-users", (users) => {
+        dispatch(setActiveUsers(users));
+      });
+
+      return () => {
+        socket.off("receive-message");
+        socket.off("active-users");
+        socket.disconnect();
+      };
+    }
   }, [userData]);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <Routes>

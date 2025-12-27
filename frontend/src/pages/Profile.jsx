@@ -48,7 +48,7 @@ const Profile = () => {
   } else {
     return (
       <div className="h-screen flex items-center justify-center">
-        <div className="border border-gray-200 shadow-xl p-5 rounded-lg">
+        <div className="border border-gray-200 shadow-xl p-5 rounded-lg min-w-[400px]">
           <form className="flex flex-col gap-5 mt-6">
             <div className="flex items-center justify-center relative min-h-[150px]">
               {/* Profile Image */}

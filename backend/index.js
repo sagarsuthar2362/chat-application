@@ -6,11 +6,14 @@ import { connectDB } from "./configs/db.js";
 import "dotenv/config";
 import { app, server } from "./socket/socket.js";
 
+const allowedOrigin =
+  process.env.NODE.ENV === "production" ? "" : "http://localhost:5173";
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chat-frontend-9jcn.onrender.com",
+    origin: allowedOrigin,
     credentials: true,
   })
 );

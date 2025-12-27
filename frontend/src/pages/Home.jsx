@@ -20,7 +20,7 @@ const Home = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar />
       <MessageArea />
     </div>

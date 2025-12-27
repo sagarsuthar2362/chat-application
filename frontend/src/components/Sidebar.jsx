@@ -10,11 +10,10 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userData, otherUsers, selectedUser } = useSelector(
+  const { userData, otherUsers, selectedUser, activeUsers } = useSelector(
     (state) => state.user
   );
 
@@ -40,7 +39,7 @@ const Sidebar = () => {
   }
   return (
     <div
-      className={`lg:w-[400px] w-full h-full bg-gray-200 ${
+      className={`lg:w-[400px] w-full h-full bg-gray-100 border-r border-r-gray-300 overflow-y-auto ${
         selectedUser ? "hidden lg:block" : "block"
       }`}
     >
@@ -69,19 +68,24 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <hr />
-
-      <div>
+      <div className="divide-y divide-gray-300">
         {otherUsers.map((user) => (
           <div
-            className="flex items-center gap-3 border-b cursor-pointer py-2"
+            className="flex items-center gap-3 cursor-pointer py-2 px-3"
             onClick={() => dispatch(setSelectedUser(user))}
+            key={user._id}
           >
-            <img
-              src={user.image || "person.png"}
-              alt={`${user.name}'s image`}
-              className="lg:h-16 lg:w-16 h-12 w-12 rounded-full object-cover"
-            />
+            <div className="relative">
+              <img
+                src={user.image || "person.png"}
+                alt={`${user.name}'s image`}
+                className="lg:h-16 lg:w-16 h-12 w-12 rounded-full object-cover"
+              />
+
+              {activeUsers?.includes(user._id) && (
+                <div className="h-3 w-3 bg-green-600 rounded-full right-0 bottom-2 absolute"></div>
+              )}
+            </div>
             <h2 className="lg:text-lg font-medium">{user.name}</h2>
           </div>
         ))}

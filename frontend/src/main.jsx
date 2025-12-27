@@ -5,7 +5,9 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
+import { io } from "socket.io-client";
 
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

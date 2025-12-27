@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-
 const useCurrentUser = () => {
+  const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchUser() {
@@ -15,7 +15,7 @@ const useCurrentUser = () => {
         });
         dispatch(setUserData(res.data.user));
       } catch (error) {
-        console.log(error);
+         dispatch(setUserData(null)); 
       }
     }
 

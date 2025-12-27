@@ -6,6 +6,8 @@ const userSlice = createSlice({
     userData: null,
     otherUsers: null,
     selectedUser: null,
+    activeUsers: [],
+    typingUsers: [],
     loading: true,
   },
   reducers: {
@@ -21,9 +23,28 @@ const userSlice = createSlice({
       state.selectedUser = action.payload;
       state.loading = false;
     },
+    setActiveUsers: (state, action) => {
+      state.activeUsers = action.payload;
+    },
+    setTypingUser: (state, action) => {
+      if (!state.typingUsers.includes(action.payload)) {
+        state.typingUsers.push(action.payload);
+      }
+    },
+    removeTypingUser: (state, action) => {
+      state.typingUsers = state.typingUsers.filter(
+        (id) => id !== action.payload
+      );
+    },
   },
 });
 
-export const { setUserData, setOtherUsers, setSelectedUser } =
-  userSlice.actions;
+export const {
+  setUserData,
+  setOtherUsers,
+  setSelectedUser,
+  setActiveUsers,
+  setTypingUser,
+  removeTypingUser,
+} = userSlice.actions;
 export default userSlice.reducer;
