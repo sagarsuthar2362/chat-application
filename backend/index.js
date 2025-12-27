@@ -1,19 +1,19 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 const PORT = process.env.PORT || 5000;
 import { connectDB } from "./configs/db.js";
-import "dotenv/config";
 import { app, server } from "./socket/socket.js";
-
-const allowedOrigin =
-  process.env.NODE.ENV === "production" ? "https://chat-backend-b77g.onrender.com/" : "http://localhost:5173";
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://chat-frontend-9jcn.onrender.com"
+        : "http://localhost:5173",
     credentials: true,
   })
 );
