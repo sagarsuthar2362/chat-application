@@ -7,7 +7,7 @@ import "dotenv/config";
 import { app, server } from "./socket/socket.js";
 
 const allowedOrigin =
-  process.env.NODE.ENV === "production" ? "" : "http://localhost:5173";
+  process.env.NODE.ENV === "production" ? "https://chat-backend-b77g.onrender.com/" : "http://localhost:5173";
 
 app.use(express.json());
 app.use(cookieParser());
