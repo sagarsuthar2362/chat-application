@@ -6,7 +6,6 @@ import Signup from "./pages/Signup";
 import useCurrentUser from "./customHooks/useCurrentUser";
 import { useDispatch, useSelector } from "react-redux";
 import Profile from "./pages/Profile";
-import useGetAllUsers from "./customHooks/useGetAllUsers";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { addMessage, setMessages } from "./redux/messageSlice";
@@ -16,7 +15,6 @@ const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
   useCurrentUser();
-  useGetAllUsers();
   const { userData, loading } = useSelector((state) => state.user);
   const { messageList } = useSelector((state) => state.message);
   const dispatch = useDispatch();

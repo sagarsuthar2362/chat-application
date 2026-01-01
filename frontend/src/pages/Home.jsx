@@ -7,10 +7,13 @@ import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import MessageArea from "../components/MessageArea";
 import useGetMessages from "../customHooks/useGetMessages";
+import useGetAllUsers from "../customHooks/useGetAllUsers";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 
 const Home = () => {
+  useGetAllUsers();
+
   const { userData, otherUsers } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();

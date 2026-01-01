@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { setOtherUsers } from '../redux/userSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setOtherUsers } from "../redux/userSlice";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const useGetAllUsers = () => {
   const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.user);
   useEffect(() => {
     async function fetchUser() {
       try {
@@ -18,8 +19,10 @@ const useGetAllUsers = () => {
       }
     }
 
-    fetchUser();
-  }, []);
+    if (userData) {
+      fetchUser();
+    }
+  }, [userData, dispatch]);
 };
 
-export default useGetAllUsers
+export default useGetAllUsers;

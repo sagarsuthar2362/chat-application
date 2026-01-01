@@ -56,7 +56,7 @@ const MessageArea = () => {
       receiverId: selectedUser._id,
     });
 
-    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef);
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
 
     typingTimeoutRef.current = setTimeout(() => {
       socket.emit("stop-typing", {
