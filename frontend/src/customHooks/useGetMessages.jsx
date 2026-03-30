@@ -16,9 +16,9 @@ const useGetMessages = () => {
           `${backendBaseUrl}/api/v1/message/get/${selectedUser._id}`,
           {
             withCredentials: true,
-          }
+          },
         );
-        dispatch(setMessages(res.data?.conversation?.messages));
+        dispatch(setMessages(res.data?.conversation?.messages || []));
       } catch (error) {
         console.log(error);
       }

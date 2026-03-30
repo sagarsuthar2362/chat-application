@@ -26,9 +26,8 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      if (res.status === 200 && res.data.token) {
+      if (res.status === 200 && res.data.checkUserExists) {
         dispatch(setUserData(res.data.checkUserExists));
-        localStorage.setItem("token", res.data.token);
         navigate("/");
       }
     } catch (error) {

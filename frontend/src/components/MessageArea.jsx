@@ -45,7 +45,7 @@ const MessageArea = () => {
   }, [selectedUser, dispatch]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messageList, typingUsers]);
 
   const handleTyping = (e) => {

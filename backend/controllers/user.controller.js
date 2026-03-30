@@ -7,7 +7,9 @@ export const signUp = async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
 
-    const checkUserExists = await User.findOne({ username });
+    const checkUserExists = await User.findOne({
+      $or: [{ username }, { email }],
+    });
     if (checkUserExists) {
       return res.status(400).json({ message: "user already exists" });
     }
@@ -27,7 +29,7 @@ export const signUp = async (req, res) => {
     });
     return res
       .status(201)
-      .json({ message: "User created succesfully", token, newUser });
+      .json({ message: "User created succesfully", newUser });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
@@ -37,13 +39,15 @@ export const signUp = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const checkUserExists = await User.findOne({ username });
+    const checkUserExists = await User.findOne({
+      username,
+    });
     if (!checkUserExists) {
       return res.status(404).json({ message: "user does not exist" });
     }
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      checkUserExists.password
+      checkUserExists.password,
     );
     if (!isPasswordCorrect) {
       return res.status(401).json({ message: "invalid credentials" });
@@ -57,7 +61,7 @@ export const login = async (req, res) => {
     });
     return res
       .status(200)
-      .json({ message: "user logged in succesfully", token, checkUserExists });
+      .json({ message: "user logged in succesfully", checkUserExists });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
@@ -85,7 +89,9 @@ export const getCurrentUser = async (req, res) => {
     const user = await User.findById(userId).select("-password");
     return res.status(200).json({ user });
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 
@@ -104,26 +110,29 @@ export const updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { name, image },
-      { new: true }
+      { new: true },
     ).select("-password");
     return res
       .status(200)
       .json({ message: "User edit succesfull", updatedUser });
   } catch (error) {
-    console.log("update profile error", error);
-    return res.status(500).json({ message: "server error" });
+    return res
+      .status(500)
+      .json({ message: "server error", error: error.message });
   }
 };
 
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({ _id: { $ne: req.userId } }).select(
-      "-password"
+      "-password",
     );
     return res
       .status(200)
       .json({ message: "users fetched succesfully", users });
   } catch (error) {
-    console.log("get all users error", error);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
